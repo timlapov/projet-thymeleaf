@@ -1,5 +1,6 @@
 package com.hb.cda.thymeleafproject.controller;
 
+import com.hb.cda.thymeleafproject.dto.LoginFormDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,11 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLogin() {
-        return "login-form.html";
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(LoginFormDTO loginFormDTO) {
+        return "redirect:/";
     }
 }

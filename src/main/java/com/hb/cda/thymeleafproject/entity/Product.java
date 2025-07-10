@@ -15,6 +15,7 @@ public class Product {
     private Double price;
     private String description;
     private Integer stock;
+
     public Product(String name, Double price, String description, Integer stock) {
         this.name = name;
         this.price = price;

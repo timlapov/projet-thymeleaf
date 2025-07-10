@@ -3,7 +3,8 @@ package com.hb.cda.thymeleafproject.entity;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +20,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
+    @NotBlank
     private String username;
     private String password;
     private String role;
+
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
