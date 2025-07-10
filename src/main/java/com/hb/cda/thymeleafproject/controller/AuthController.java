@@ -15,6 +15,8 @@ import com.hb.cda.thymeleafproject.repository.UserRepository;
 
 import jakarta.validation.Valid;
 
+import java.util.Optional;
+
 @Controller
 public class AuthController {
 
@@ -56,12 +58,20 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String showLogin() {
+    public String showLogin(Model model) {
+        model.addAttribute("loginFormDTO", new LoginFormDTO());
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginUser(LoginFormDTO loginFormDTO) {
+    public String loginUser(@Valid LoginFormDTO loginFormDTO, Model model) {
+        model.addAttribute("loginFormDTO", loginFormDTO);
+        Optional<User> userOptional = repo.findByUsername(loginFormDTO.getUsername());
+        if (userOptional.isEmpty() || !encoder.matches(loginFormDTO.getPassword(), userOptional.get().getPassword())) {
+            model.addAttribute("error", "Invalid login and/or password");
+            return "login";
+        }
         return "redirect:/";
     }
+
 }
