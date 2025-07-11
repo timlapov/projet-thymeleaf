@@ -14,7 +14,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilter(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
         .anyRequest().permitAll());
-        http.formLogin(login -> login.loginPage("/login"));
+        http.formLogin(login -> login.loginPage("/login").failureUrl("/login?error=true"));
         
         return http.build();
     }
