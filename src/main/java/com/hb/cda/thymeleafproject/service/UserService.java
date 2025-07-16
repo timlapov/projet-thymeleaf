@@ -1,4 +1,4 @@
-package com.hb.cda.thymeleafproject.security;
+package com.hb.cda.thymeleafproject.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

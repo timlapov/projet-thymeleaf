@@ -13,17 +13,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+// Handles requests for the home page.
 @Controller
 public class HomeController {
 
     UserRepository userRepository;
     ProductRepository productRepository;
 
+    // Constructor for dependency injection.
     public HomeController(UserRepository userRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
     }
 
+    // Displays the home page with a paginated list of products.
     @GetMapping("/")
     public String displayHome(
             @AuthenticationPrincipal User user,

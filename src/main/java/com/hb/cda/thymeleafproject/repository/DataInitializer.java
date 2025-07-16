@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+// Initializes the database with some sample data.
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -15,6 +16,7 @@ public class DataInitializer implements CommandLineRunner {
     private final ProductRepository productRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // Constructor for dependency injection.
     public DataInitializer(UserRepository userRepository, ProductRepository productRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
@@ -22,8 +24,10 @@ public class DataInitializer implements CommandLineRunner {
     }
 
 
+    // This method is executed on application startup.
     @Override
     public void run(String... args) throws Exception {
+        // Add some sample users if the user repository is empty.
         if (userRepository.count() == 0) {
             userRepository.saveAll(List.of(
             new User("tim", passwordEncoder.encode("1234"), "ROLE_USER"),
@@ -39,6 +43,7 @@ public class DataInitializer implements CommandLineRunner {
             ));
         }
 
+        // Add some sample products if the product repository is empty.
             if (productRepository.count() == 0) {
                 productRepository.saveAll(List.of(
                         new Product("iPhone 14 Pro", 999.99, "The latest and greatest from Apple.", 50),

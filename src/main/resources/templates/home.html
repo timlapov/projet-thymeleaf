@@ -17,7 +17,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/">Home</a>
+          <a class="nav-link active" href="/"><i class="bi bi-house"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/cart"><i class="bi bi-cart"></i></a>
         </li>
         <li class="nav-item" th:if="${username != null}">
           <a class="nav-link" href="#">Hello, <span th:text="${username}"></span></a>
@@ -44,13 +47,19 @@
 
 <!-- Product list -->
 <div class="container d-flex justify-content-center mt-5">
-  <ul class="list-group list-group col-md-6">
+  <ul class="list-group list-group col-md-8">
   <li class="list-group-item d-flex justify-content-between align-items-start" th:each="product : ${products}">
     <div class="ms-2 me-auto">
-      <div class="fw-bold" th:text="${product.name}">PRODUCT_NAME</div>
+      <div class="fw-bold">
+        <span th:text="${product.name}">PRODUCT_NAME</span>
+        <span class="badge bg-secondary text-white rounded-pill ms-2">[[${product.stock}]] in stock</span>
+      </div>
       <span th:text="${product.description}">PRODUCT_DESCRIPTION</span>
     </div>
-    <span class="badge text-bg-primary rounded-pill">[[${product.price}]] €</span>
+    <div class="d-flex align-items-center">
+      <span class="badge text-bg-primary rounded-pill">[[${product.price}]] €</span>
+      <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post" class="ms-2"><button type="submit"><i class="bi bi-cart"></i></button></form>
+    </div>
   </li>
 </ul>
 </div>

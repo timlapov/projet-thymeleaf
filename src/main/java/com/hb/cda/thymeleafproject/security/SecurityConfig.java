@@ -7,9 +7,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+// Configures the security settings for the application.
 @Configuration
 public class SecurityConfig {
 
+    // Configures the security filter chain.
     @Bean
     SecurityFilterChain securityFilter(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
@@ -19,6 +21,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Configures the password encoder.
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
